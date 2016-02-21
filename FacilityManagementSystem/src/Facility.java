@@ -19,6 +19,25 @@ public class Facility {
 
 
 
+    public void changeName(String newName){
+        facilityName = newName;
+    }
+
+    public void changeManager(String newManager){
+        facilityManager = newManager;
+    }
+
+    public void changeMaintenenceSchedule(String newSchedule){
+        maintenenceSchedule = newSchedule;
+    }
+
+    public void changeUsageRate(Float newRate){
+        usageRate = newRate;
+    }
+
+
+
+
     public String getFacilityInformation(Facility facility){
         String info = ("Facility Name: " + facility.facilityName +"\nFacility Manager: " +
                 facility.facilityManager + "\nMaintenence Schedule: " + facility.maintenenceSchedule +
