@@ -24,7 +24,7 @@ public class FacilityUse {
     }
 
     public void assignFacilityToUse(Facility facility){
-
+        //Not sure what this should be doing
     }
 
     public void vacateFacility(Facility facility) {
@@ -33,14 +33,14 @@ public class FacilityUse {
     }
 
     public Date[] ListInspections(Facility facility){
-
+        //Not sure what this should be doing
     }
 
     public Float listActualUsage (Facility facility){
-
+        System.out.println(facility.usageSchedule);
     }
 
     public Float calcUsageRate(Facility facility){
-
+        //can you do this one, since you were saying that rate is price?
     }
 }

@@ -33,6 +33,11 @@ public class Facility {
         maintenenceSchedule = newSchedule;
     }
 
+
+    public void changeUsageSchedule(String newSchedule){
+        usageSchedule = newSchedule;
+    }
+
     public void changeUsageRate(Float newRate){
         usageRate = newRate;
     }
