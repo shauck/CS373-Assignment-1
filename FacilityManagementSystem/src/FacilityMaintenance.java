@@ -13,7 +13,8 @@ import java.sql.*;
 public class FacilityMaintenance {
 
 
-    public Date makeFacilityMaintenenceRequest(Facility facility){
+    public Array makeFacilityMaintenenceRequest(Facility facility, String maintenenceDate){
+        facility.maintenenceSchedule += maintenenceDate;
 
     }
 
@@ -22,8 +23,9 @@ public class FacilityMaintenance {
     }
 
     public Float calcMaintenanceCostForFacility(Facility facility){
-
+        int maintenenceCost =
     }
+
     public Float calcProblemRateForFacility(Facility facility){
 
     }

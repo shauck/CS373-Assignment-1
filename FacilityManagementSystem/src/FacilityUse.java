@@ -13,7 +13,9 @@ import java.util.Date;
 public class FacilityUse {
 
     public boolean isInUseDuringInterval(Facility facility, int startTime, int endTime){
-        if (facility.)
+        if (facility.isFacilityInUse == Boolean.TRUE){
+
+        }
     }
 
     public void assignFacilityToUse(Facility facility){
@@ -21,7 +23,8 @@ public class FacilityUse {
     }
 
     public void vacateFacility(Facility facility) {
-
+        facility.isFacilityInUse = Boolean.FALSE;
+        facility.usageSchedule = null;
     }
 
     public Date[] ListInspections(Facility facility){

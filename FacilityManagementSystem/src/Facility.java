@@ -5,6 +5,7 @@
 
 import java.io.*;
 import java.lang.*;
+import java.lang.reflect.*;
 import java.util.*;
 import java.math.*;
 import java.sql.*;
@@ -14,9 +15,10 @@ public class Facility {
     public String facilityName;
     public String facilityManager;
     public String maintenenceSchedule;
+    public String usageSchedule;
+    public Boolean isFacilityInUse;
     public float usageRate;
     public int problemCounter;
-
 
 
     public void changeName(String newName){
