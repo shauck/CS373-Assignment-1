@@ -22,8 +22,9 @@ public class FacilityMaintenance {
 
     }
 
-    public Float calcMaintenanceCostForFacility(Facility facility){
-        int maintenenceCost =
+    public Float calcMaintenanceCostForFacility(Facility facility, Float unitCost, Float numMaintenanceRequests){
+        Float maintenenceCost = unitCost * numMaintenanceRequests;
+        return maintenenceCost;
     }
 
     public Float calcProblemRateForFacility(Facility facility){
@@ -35,7 +36,7 @@ public class FacilityMaintenance {
     }
 
     public Date[] listMaintenanceRequests(Facility facility){
-
+        System.out.println(facility.maintenenceSchedule);
     }
 
     public Date[] listMaintenance(Facility facility){
