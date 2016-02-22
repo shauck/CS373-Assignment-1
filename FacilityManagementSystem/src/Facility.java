@@ -22,7 +22,7 @@ public class Facility {
     Connection c = DriverManager.getConnection("jdbc:sqlite:FacilityManagementSystem.db");
     Statement stmt = null;
 
-    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter){
+    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, Connection c){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -32,7 +32,7 @@ public class Facility {
         this.problemCounter = problemCounter;
 
         try {
-            openConnection();
+            openConnection(c);
             stmt = c.createStatement();
             String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER) " +
                          "VALUES (?, ?, ?, ?, ?, ?)";
@@ -82,9 +82,7 @@ public class Facility {
         return info;
     }
 
-    public void openConnection() {
-        Connection c = null;
-        Statement stmt = null;
+    public void openConnection(Connection c) {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:FacilityManagementSystem.db");
