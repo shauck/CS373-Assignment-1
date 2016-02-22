@@ -16,7 +16,6 @@ public class Facility {
     public String facilityManager;
     public String maintenenceSchedule;
     public String usageSchedule;
-    public Boolean isFacilityInUse;
     public float usageRate;
     public int problemCounter;
 

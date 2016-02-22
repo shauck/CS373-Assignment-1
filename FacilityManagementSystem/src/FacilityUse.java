@@ -14,11 +14,9 @@ public class FacilityUse {
 
     public boolean isInUseDuringInterval(Facility facility, int startTime, int endTime, int currentDate){
         if (startTime <= currentDate && endTime >= currentDate){
-            facility.isFacilityInUse = Boolean.TRUE;
             return Boolean.TRUE;
         }
         else{
-            facility.isFacilityInUse = Boolean.FALSE;
             return Boolean.FALSE;
         }
     }
