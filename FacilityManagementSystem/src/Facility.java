@@ -49,6 +49,7 @@ public class Facility {
                 facility.facilityManager + "\nMaintenence Schedule: " + facility.maintenenceSchedule +
                 "\nUsage Rate: " + facility.usageRate);
 
+
         return info;
     }
 }
