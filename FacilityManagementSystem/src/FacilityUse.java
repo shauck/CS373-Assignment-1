@@ -26,7 +26,6 @@ public class FacilityUse {
     }
 
     public void vacateFacility(Facility facility) {
-        facility.isFacilityInUse = Boolean.FALSE;
         facility.usageSchedule = null;
     }
 
