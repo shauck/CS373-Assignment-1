@@ -29,7 +29,7 @@ public class SQLiteJDBC {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("Opened database sucessfully");
+        //System.out.println("Opened database sucessfully");
 
 
 
