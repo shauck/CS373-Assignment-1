@@ -19,13 +19,13 @@ public class Facility {
     public String usageSchedule;
     public float usageRate;
     public int problemCounter;
-    public float hourlyMaintenanceCost;
+    public float unitMaintenanceCost;
     public String currentUse;
     public String inspectionSchedule;
     public String maintenanceRequest = null;
     public Statement stmt = null;
 
-    public Facility(float hourlyMaintenanceCost, int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule){
+    public Facility( int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule, float hourlyMaintenanceCost){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -35,7 +35,7 @@ public class Facility {
         this.problemCounter = problemCounter;
         this.currentUse = currentUse;
         this.inspectionSchedule = inspectionSchedule;
-        this.hourlyMaintenanceCost = hourlyMaintenanceCost;
+        this.unitMaintenanceCost = hourlyMaintenanceCost;
 
 
         try {
@@ -51,7 +51,7 @@ public class Facility {
             ps.setFloat(5, this.usageRate);
             ps.setString(6, this.usageSchedule);
             ps.setInt(7, this.problemCounter);
-            ps.setFloat(8, this.hourlyMaintenanceCost);
+            ps.setFloat(8, this.unitMaintenanceCost);
             ps.setString(8, this.currentUse);
             ps.setString(9, this.inspectionSchedule);
             ps.executeUpdate();
@@ -219,4 +219,6 @@ public class Facility {
 
 
     }
+
 }
+

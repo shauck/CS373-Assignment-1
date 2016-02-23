@@ -24,7 +24,7 @@ public class SQLiteJDBC {
                     " USAGERATE      REAL     NOT NULL" +
                     " USAGE SCHEDULE  TEXT     NOT NULL" +
                     " PROBLEMCOUNTER  INT      NOT NULL" +
-                    " HOURLYMAINTAINANCECOST   REAL  NOT NULL" +
+                    " UNITMAINTAINANCECOST   REAL  NOT NULL" +
                     " CURRENTUSE      TEXT     NOT NULL" +
                     " INSPECTIONSCHEDULE   TEXT  NOT NULL" +
                     " MAINTENANCEREQUEST   TEXT)";
