@@ -33,6 +33,7 @@ public class FacilityMaintenance {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        return facility.maintenenceSchedule;
     }
 
     public Float calcMaintenanceCostForFacility(Facility facility, Float unitCost, Float numMaintenanceRequests){
@@ -48,8 +49,31 @@ public class FacilityMaintenance {
 
     }
 
-    public Date[] listMaintenanceRequests(Facility facility){
-        System.out.println(facility.maintenenceSchedule);
+    public String listMaintenanceRequests(Facility facility){
+        try {
+            Connection c = openConnection();
+            stmt = c.createStatement();
+            String sql = "SELECT MAINTENANCESCHEDULE FROM Facilities where ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, facility.ID);
+            ps.executeQuery();
+
+            String result = null;
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result = rs.getString("INSPECTIONSCHEDULE");
+                System.out.println(result);
+                System.out.println();
+            }
+            rs.close();
+            ps.close();
+            c.close();
+
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public Date[] listMaintenance(Facility facility){
