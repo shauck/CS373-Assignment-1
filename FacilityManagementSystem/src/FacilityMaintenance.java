@@ -13,9 +13,10 @@ import java.sql.*;
 public class FacilityMaintenance {
     public Statement stmt = null;
 
-    public Array makeFacilityMaintenenceRequest(Facility facility, String maintenenceDate){
-        facility.maintenenceSchedule += maintenenceDate;
-
+    public String makeFacilityMaintenanceRequest(Facility facility, String maintenanceDate){
+        String mS = facility.maintenenceSchedule;
+        mS = mS + maintenanceDate;
+        return mS;
     }
 
     public String scheduleMaintenance(Facility facility){
@@ -41,11 +42,14 @@ public class FacilityMaintenance {
         return maintenenceCost;
     }
 
-    public Float calcProblemRateForFacility(Facility facility){
-
+    public int calcProblemRateForFacility(Facility facility){
+        int problemRate = 0;
+        return problemRate;
     }
 
-    public Float calcDowntimeForFacility(Facility facility){
+    public int calcDowntimeForFacility(Facility facility){
+        int downtime = 0;
+        return downtime;
 
     }
 
@@ -74,14 +78,17 @@ public class FacilityMaintenance {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        return facility.maintenenceSchedule;
     }
 
-    public Date[] listMaintenance(Facility facility){
-
+    public String listMaintenance(Facility facility){
+        String maintenance = null;
+        return maintenance;
     }
 
-    public String[] listFacilityProblems(Facility facility){
-
+    public String listFacilityProblems(Facility facility){
+        String problems = null;
+        return problems;
     }
 
     public Connection openConnection() throws ClassNotFoundException, SQLException {

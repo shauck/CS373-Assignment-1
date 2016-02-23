@@ -85,12 +85,15 @@ public class FacilityUse {
         return result;
     }
 
-    public Float listActualUsage (Facility facility){
+    public String listActualUsage (Facility facility){
         System.out.println(facility.usageSchedule);
+        return facility.usageSchedule;
     }
 
     public Float calcUsageRate(Facility facility){
         //can you do this one, since you were saying that rate is price?
+        Float usageRate = 0f;
+        return usageRate;
     }
 
     public Connection openConnection() throws ClassNotFoundException, SQLException {
