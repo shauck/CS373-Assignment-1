@@ -42,8 +42,27 @@ public class FacilityMaintenance {
 
     }
 
-    public float calcMaintenanceCostForFacility(Facility facility, float numMaintenanceRequests){
-        float maintenanceCost = facility.unitMaintenanceCost * numMaintenanceRequests;
+    public float calcMaintenanceCostForFacility(Facility facility){
+        float maintenanceCost = facility.unitMaintenanceCost * requestCounter;
+        String stringRequestCounter = Float.toString(requestCounter);
+        try {
+            Connection c = openConnection();
+            stmt = c.createStatement();
+            String sql = "UPDATE Facilities SET MINTENANCECOST to ? where ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, stringRequestCounter);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
+
+            ps.close();
+            stmt.close();
+            c.close();
+
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
         return maintenanceCost;
     }
 
