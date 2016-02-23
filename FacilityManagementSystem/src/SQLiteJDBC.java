@@ -20,7 +20,14 @@ public class SQLiteJDBC {
                     "(ID INT PRIMARY KEY      NOT NULL" +
                     " NAME           TEXT     NOT NULL" +
                     " MANAGER        TEXT     NOT NULL" +
-                    " USAGERATE      REAL     NOT NULL)";
+                    " MAINTENANCESCHEDULE    TEXT    NOT NULL" +
+                    " USAGERATE      REAL     NOT NULL" +
+                    " USAGE SCHEDULE  TEXT     NOT NULL" +
+                    " PROBLEMCOUNTER  INT      NOT NULL" +
+                    " HOURLYMAINTAINANCECOST   REAL  NOT NULL" +
+                    " CURRENTUSE      TEXT     NOT NULL" +
+                    " INSPECTIONSCHEDULE   TEXT  NOT NULL" +
+                    " MAINTENANCEREQUEST   TEXT)";
 
             stmt.executeUpdate(sql);
             stmt.close();

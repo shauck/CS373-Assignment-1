@@ -113,10 +113,11 @@ public class FacilityUse {
     }
 
 
-    public float calcUsageRate(Facility facility){
-        //can you do this one, since you were saying that rate is price?
-        float usageRate = 0f;
-        return usageRate;
+    public float calcUsageRate(Facility facility, int hours){
+        float rate = facility.usageRate;
+        float totalrate = rate * hours;
+        System.out.println("The rate for the " + facility + " for " + hours + " hours is $" + totalrate);
+        return totalrate;
     }
 
     public Connection openConnection() throws ClassNotFoundException, SQLException {
