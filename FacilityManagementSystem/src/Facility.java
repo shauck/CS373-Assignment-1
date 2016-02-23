@@ -19,7 +19,7 @@ public class Facility {
     public String usageSchedule;
     public float usageRate;
     public int problemCounter;
-    public float hourlyMaintenanceCost;
+    public float unitMaintenanceCost;
     public String currentUse;
     public String inspectionSchedule;
     public Statement stmt = null;
@@ -34,7 +34,7 @@ public class Facility {
         this.problemCounter = problemCounter;
         this.currentUse = currentUse;
         this.inspectionSchedule = inspectionSchedule;
-        this.hourlyMaintenanceCost = hourlyMaintenanceCost;
+        this.unitMaintenanceCost = hourlyMaintenanceCost;
 
         try {
             Connection c = openConnection();

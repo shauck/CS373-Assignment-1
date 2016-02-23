@@ -37,9 +37,9 @@ public class FacilityMaintenance {
         return facility.maintenanceSchedule;
     }
 
-    public Float calcMaintenanceCostForFacility(Facility facility){
-        Float maintenenceCost = unitCost * numMaintenanceRequests;
-        return maintenenceCost;
+    public float calcMaintenanceCostForFacility(Facility facility, float numMaintenanceRequests){
+        float maintenanceCost = facility.unitMaintenanceCost * numMaintenanceRequests;
+        return maintenanceCost;
     }
 
     public int calcProblemRateForFacility(Facility facility){
