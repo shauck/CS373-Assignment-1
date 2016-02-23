@@ -22,9 +22,10 @@ public class Facility {
     public float unitMaintenanceCost;
     public String currentUse;
     public String inspectionSchedule;
+    public String maintenanceRequest = null;
     public Statement stmt = null;
 
-    public Facility(float hourlyMaintenanceCost, int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule){
+    public Facility( int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule, float hourlyMaintenanceCost){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -36,19 +37,21 @@ public class Facility {
         this.inspectionSchedule = inspectionSchedule;
         this.unitMaintenanceCost = hourlyMaintenanceCost;
 
+
         try {
             Connection c = openConnection();
             stmt = c.createStatement();
-            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER, CURRENTUSE, INSPECTIONSCHEDULE) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGERATE, USAGESCHEDULE, PROBLEMCOUNTER, HOURLYMAINTENANCECOST, CURRENTUSE, INSPECTIONSCHEDULE, MAINTENANCEREQUEST) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, this.ID);
             ps.setString(2, this.facilityName);
             ps.setString(3, this.facilityManager);
             ps.setString(4, this.maintenanceSchedule);
-            ps.setString(5, this.usageSchedule);
-            ps.setFloat(6, this.usageRate);
+            ps.setFloat(5, this.usageRate);
+            ps.setString(6, this.usageSchedule);
             ps.setInt(7, this.problemCounter);
+            ps.setFloat(8, this.unitMaintenanceCost);
             ps.setString(8, this.currentUse);
             ps.setString(9, this.inspectionSchedule);
             ps.executeUpdate();
@@ -216,4 +219,6 @@ public class Facility {
 
 
     }
+
 }
+
