@@ -188,16 +188,24 @@ public class Facility {
                 String name = rs.getString("NAME");
                 String manager = rs.getString("MANAGER");
                 String mSchedule = rs.getString("MAINTENANCESCHEDULE");
-                String uSchedule = rs.getString("USAGESCHEDULE");
                 Float rate = rs.getFloat("USAGERATE");
+                String uSchedule = rs.getString("USAGESCHEDULE");
                 int problems = rs.getInt("PROBLEMCOUNT");
+                float mCost = rs.getFloat("UNITMAINTENANCECOST");
+                String cUse = rs.getString("CURRENTUSE");
+                String iSchedule = rs.getString("INSPECTIONSCHEDULE");
+                String mRequest = rs.getString("MAINTENANCEREQUEST");
                 System.out.println("ID = " + i);
                 System.out.println("Facility name = " + name);
                 System.out.println("Facility Manager = " + manager);
                 System.out.println("Maintenance Schedule = " + mSchedule);
-                System.out.println("Usage Schedule = " + uSchedule);
                 System.out.println("Usage Rate = "+ rate);
+                System.out.println("Usage Schedule = " + uSchedule);
                 System.out.println("No. of Facility Problems = " + problems);
+                System.out.println("Facililty Maintenance Cost = " + mCost);
+                System.out.println("Facility Current use = " + cUse);
+                System.out.println("Facililty Inspection Schedule = " + iSchedule);
+                System.out.println("Latest Facility Maintenance Request = " + mRequest);
                 System.out.println();
             }
             rs.close();
