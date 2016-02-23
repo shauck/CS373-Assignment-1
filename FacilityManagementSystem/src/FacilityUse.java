@@ -113,9 +113,9 @@ public class FacilityUse {
     }
 
 
-    public Float calcUsageRate(Facility facility){
+    public float calcUsageRate(Facility facility){
         //can you do this one, since you were saying that rate is price?
-        Float usageRate = 0f;
+        float usageRate = 0f;
         return usageRate;
     }
 

@@ -14,7 +14,7 @@ public class FacilityMaintenance {
     public Statement stmt = null;
 
     public String makeFacilityMaintenanceRequest(Facility facility, String maintenanceDate){
-        String mS = facility.maintenenceSchedule;
+        String mS = facility.maintenanceSchedule;
         mS = mS + maintenanceDate;
         return mS;
     }
@@ -25,7 +25,7 @@ public class FacilityMaintenance {
             stmt = c.createStatement();
             String sql = "UPDATE Facilities SET MAINTENANCESCHEDULE to ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, facility.maintenenceSchedule);
+            ps.setString(1, facility.maintenanceSchedule);
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
@@ -34,7 +34,7 @@ public class FacilityMaintenance {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return facility.maintenenceSchedule;
+        return facility.maintenanceSchedule;
     }
 
     public Float calcMaintenanceCostForFacility(Facility facility, Float unitCost, Float numMaintenanceRequests){
@@ -78,7 +78,7 @@ public class FacilityMaintenance {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return facility.maintenenceSchedule;
+        return facility.maintenanceSchedule;
     }
 
     public String listMaintenance(Facility facility){

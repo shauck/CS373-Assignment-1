@@ -15,7 +15,7 @@ public class Facility {
     public int ID;
     public String facilityName;
     public String facilityManager;
-    public String maintenenceSchedule;
+    public String maintenanceSchedule;
     public String usageSchedule;
     public float usageRate;
     public int problemCounter;
@@ -27,7 +27,7 @@ public class Facility {
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
-        this.maintenenceSchedule = maintenenceSchedule;
+        this.maintenanceSchedule = maintenenceSchedule;
         this.usageSchedule = usageSchedule;
         this.usageRate = usageRate;
         this.problemCounter = problemCounter;
@@ -43,7 +43,7 @@ public class Facility {
             ps.setInt(1, this.ID);
             ps.setString(2, this.facilityName);
             ps.setString(3, this.facilityManager);
-            ps.setString(4, this.maintenenceSchedule);
+            ps.setString(4, this.maintenanceSchedule);
             ps.setString(5, this.usageSchedule);
             ps.setFloat(6, this.usageRate);
             ps.setInt(7, this.problemCounter);
@@ -103,14 +103,14 @@ public class Facility {
         }
     }
 
-    public void changeMaintenenceSchedule(Facility facility, String newSchedule) {
-        facility.maintenenceSchedule = newSchedule;
+    public void changeMaintenanceSchedule(Facility facility, String newSchedule) {
+        facility.maintenanceSchedule = newSchedule;
         try{
             Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set MAINTENANCESCHEDULE = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, facility.maintenenceSchedule);
+            ps.setString(1, facility.maintenanceSchedule);
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
