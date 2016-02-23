@@ -11,15 +11,28 @@ import java.sql.*;
  */
 
 public class FacilityMaintenance {
-
+    public Statement stmt = null;
 
     public Array makeFacilityMaintenenceRequest(Facility facility, String maintenenceDate){
         facility.maintenenceSchedule += maintenenceDate;
 
     }
 
-    public Date scheduleMaintenance(Facility facility){
+    public String scheduleMaintenance(Facility facility){
+        try {
+            Connection c = openConnection();
+            stmt = c.createStatement();
+            String sql = "UPDATE Facilities SET MAINTENANCESCHEDULE to ? where ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, facility.maintenenceSchedule);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public Float calcMaintenanceCostForFacility(Facility facility, Float unitCost, Float numMaintenanceRequests){
@@ -45,6 +58,13 @@ public class FacilityMaintenance {
 
     public String[] listFacilityProblems(Facility facility){
 
+    }
+
+    public Connection openConnection() throws ClassNotFoundException, SQLException {
+        String connectionURL = "jdbc:sqlite:FacilityManagementSystem.db";
+        Class.forName("org.sqlite.JDBC");
+        Connection con = DriverManager.getConnection(connectionURL);
+        return con;
     }
 
 }
