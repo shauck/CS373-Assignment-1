@@ -85,10 +85,33 @@ public class FacilityUse {
         return result;
     }
 
-    public String listActualUsage (Facility facility){
+    public String listActualUsage (Facility facility) {
         System.out.println(facility.usageSchedule);
-        return facility.usageSchedule;
+
+        String result = null;
+        try {
+            Connection c = openConnection();
+            String sql = "SELECT USAGESCHEDULE FROM Facilities WHERE ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, facility.ID);
+            ps.executeQuery();
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result = rs.getString("USAGESCHEDULE");
+                System.out.println(result);
+                System.out.println();
+            }
+            rs.close();
+            ps.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return result;
     }
+
 
     public Float calcUsageRate(Facility facility){
         //can you do this one, since you were saying that rate is price?
