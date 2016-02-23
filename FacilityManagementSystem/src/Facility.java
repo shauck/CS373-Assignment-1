@@ -199,8 +199,8 @@ public class Facility {
                 System.out.println("Facility name = " + name);
                 System.out.println("Facility Manager = " + manager);
                 System.out.println("Maintenance Schedule = " + mSchedule);
-                System.out.println("Usage Rate = "+ rate);
                 System.out.println("Usage Schedule = " + uSchedule);
+                System.out.println("Usage Rate = "+ rate);
                 System.out.println("No. of Facility Problems = " + problems);
                 System.out.println("Facility Maintenance Cost = " + mCost);
                 System.out.println("Facility Current use = " + cUse);
