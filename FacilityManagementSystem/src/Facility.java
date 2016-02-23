@@ -19,10 +19,10 @@ public class Facility {
     public String usageSchedule;
     public float usageRate;
     public int problemCounter;
-    public Connection c = DriverManager.getConnection("jdbc:sqlite:FacilityManagementSystem.db");
+    public String currentUse;
     public Statement stmt = null;
 
-    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, Connection c){
+    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -30,12 +30,13 @@ public class Facility {
         this.usageSchedule = usageSchedule;
         this.usageRate = usageRate;
         this.problemCounter = problemCounter;
+        this.currentUse = currentUse;
 
         try {
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER) " +
-                         "VALUES (?, ?, ?, ?, ?, ?)";
+                         "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, this.ID);
             ps.setString(2, this.facilityName);
@@ -44,6 +45,8 @@ public class Facility {
             ps.setString(5, this.usageSchedule);
             ps.setFloat(6, this.usageRate);
             ps.setInt(7, this.problemCounter);
+            ps.setString(8, this.currentUse);
+            ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -52,14 +55,15 @@ public class Facility {
 
 
     public void changeName(Facility facility, String newName) {
-        this.facilityName = newName;
+        facility.facilityName = newName;
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set NAME = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, this.facilityName);
-            ps.setInt(2, this.ID);
+            ps.setString(1, facility.facilityName);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -68,14 +72,15 @@ public class Facility {
     }
 
     public void changeManager(Facility facility, String newManager) {
-        this.facilityManager = newManager;
+        facility.facilityManager = newManager;
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set MANAGER = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, this.facilityManager);
-            ps.setInt(2, this.ID);
+            ps.setString(1, facility.facilityManager);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -84,14 +89,15 @@ public class Facility {
     }
 
     public void changeMaintenenceSchedule(Facility facility, String newSchedule) {
-        this.maintenenceSchedule = newSchedule;
+        facility.maintenenceSchedule = newSchedule;
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set MAINTENANCESCHEDULE = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, this.maintenenceSchedule);
-            ps.setInt(2, this.ID);
+            ps.setString(1, facility.maintenenceSchedule);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -101,14 +107,15 @@ public class Facility {
 
 
     public void changeUsageSchedule(Facility facility, String newSchedule) {
-        this.usageSchedule = newSchedule;
+        facility.usageSchedule = newSchedule;
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set USAGESCHEDULE = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, this.usageSchedule);
-            ps.setInt(2, this.ID);
+            ps.setString(1, facility.usageSchedule);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -117,14 +124,15 @@ public class Facility {
     }
 
     public void changeUsageRate(Facility facility, Float newRate) {
-        this.usageRate = newRate;
+        facility.usageRate = newRate;
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "UPDATE Facilities set USAGERATE = ? where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setFloat(1, this.usageRate);
-            ps.setInt(2, this.ID);
+            ps.setFloat(1, facility.usageRate);
+            ps.setInt(2, facility.ID);
+            ps.executeUpdate();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -133,13 +141,14 @@ public class Facility {
     }
 
 
-    public String getFacilityInformation(Facility facility, int id) {
+    public void getFacilityInformation(int id) {
         try{
-            openConnection(c);
+            Connection c = openConnection();
             stmt = c.createStatement();
             String sql = "SELECT * FROM Facilities where ID = ?";
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, this.ID);
+            ps.setInt(1, id);
+            ps.executeQuery();
 
             ResultSet rs = ps.executeQuery(sql);
             while (rs.next()){
@@ -168,14 +177,12 @@ public class Facility {
         }
     }
 
-    public void openConnection(Connection c) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:FacilityManagementSystem.db");
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
+    public Connection openConnection() throws ClassNotFoundException, SQLException {
+        String connection = "jdbc:sqlite:FacilityManagementSystem.db";
+        Class.forName("org.sqlite.JDBC");
+        Connection con = DriverManager.getConnection(connection);
+        return con;
+
 
 
     }
