@@ -12,14 +12,18 @@ import java.sql.*;
 
 public class FacilityMaintenance {
     public Statement stmt = null;
+    public float requestCounter = 0;
 
-    public String makeFacilityMaintenanceRequest(Facility facility, String maintenanceDate){
-        String mS = facility.maintenanceSchedule;
-        mS = mS + maintenanceDate;
-        return mS;
+    public void makeFacilityMaintenanceRequest(Facility facility, String maintenanceRequest){
+
+        scheduleMaintenance(facility, maintenanceRequest);
+        System.out.println("A Maintenance Request for " + facility + " has been sumbitted.");
+        requestCounter += 1;
     }
 
-    public String scheduleMaintenance(Facility facility){
+    public void scheduleMaintenance(Facility facility, String maintenanceRequest){
+        facility.maintenanceRequest = maintenanceRequest;
+        String newRequest = facility.maintenanceRequest;
         try {
             Connection c = openConnection();
             stmt = c.createStatement();
@@ -28,13 +32,14 @@ public class FacilityMaintenance {
             ps.setString(1, facility.maintenanceSchedule);
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
+            System.out.println("Maintenance for "+ facility + " has been scheduled.");
 
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return facility.maintenanceSchedule;
+
     }
 
     public float calcMaintenanceCostForFacility(Facility facility, float numMaintenanceRequests){
