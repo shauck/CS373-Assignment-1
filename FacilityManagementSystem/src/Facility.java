@@ -19,11 +19,12 @@ public class Facility {
     public String usageSchedule;
     public float usageRate;
     public int problemCounter;
+    public float hourlyMaintenanceCost;
     public String currentUse;
     public String inspectionSchedule;
     public Statement stmt = null;
 
-    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule){
+    public Facility(float hourlyMaintenanceCost, int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -33,6 +34,7 @@ public class Facility {
         this.problemCounter = problemCounter;
         this.currentUse = currentUse;
         this.inspectionSchedule = inspectionSchedule;
+        this.hourlyMaintenanceCost = hourlyMaintenanceCost;
 
         try {
             Connection c = openConnection();
