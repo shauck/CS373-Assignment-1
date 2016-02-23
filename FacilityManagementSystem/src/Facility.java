@@ -41,15 +41,15 @@ public class Facility {
         try {
             Connection c = openConnection();
             stmt = c.createStatement();
-            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGERATE, USAGESCHEDULE, PROBLEMCOUNTER, HOURLYMAINTENANCECOST, CURRENTUSE, INSPECTIONSCHEDULE, MAINTENANCEREQUEST) " +
+            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER, HOURLYMAINTENANCECOST, CURRENTUSE, INSPECTIONSCHEDULE, MAINTENANCEREQUEST) " +
                          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, this.ID);
             ps.setString(2, this.facilityName);
             ps.setString(3, this.facilityManager);
             ps.setString(4, this.maintenanceSchedule);
-            ps.setFloat(5, this.usageRate);
             ps.setString(6, this.usageSchedule);
+            ps.setFloat(5, this.usageRate);
             ps.setInt(7, this.problemCounter);
             ps.setFloat(8, this.unitMaintenanceCost);
             ps.setString(8, this.currentUse);
@@ -188,8 +188,8 @@ public class Facility {
                 String name = rs.getString("NAME");
                 String manager = rs.getString("MANAGER");
                 String mSchedule = rs.getString("MAINTENANCESCHEDULE");
-                Float rate = rs.getFloat("USAGERATE");
                 String uSchedule = rs.getString("USAGESCHEDULE");
+                Float rate = rs.getFloat("USAGERATE");
                 int problems = rs.getInt("PROBLEMCOUNT");
                 float mCost = rs.getFloat("UNITMAINTENANCECOST");
                 String cUse = rs.getString("CURRENTUSE");
@@ -202,9 +202,9 @@ public class Facility {
                 System.out.println("Usage Rate = "+ rate);
                 System.out.println("Usage Schedule = " + uSchedule);
                 System.out.println("No. of Facility Problems = " + problems);
-                System.out.println("Facililty Maintenance Cost = " + mCost);
+                System.out.println("Facility Maintenance Cost = " + mCost);
                 System.out.println("Facility Current use = " + cUse);
-                System.out.println("Facililty Inspection Schedule = " + iSchedule);
+                System.out.println("Facility Inspection Schedule = " + iSchedule);
                 System.out.println("Latest Facility Maintenance Request = " + mRequest);
                 System.out.println();
             }

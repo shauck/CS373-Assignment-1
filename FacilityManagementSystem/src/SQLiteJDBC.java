@@ -21,8 +21,8 @@ public class SQLiteJDBC {
                     " NAME           TEXT     NOT NULL" +
                     " MANAGER        TEXT     NOT NULL" +
                     " MAINTENANCESCHEDULE    TEXT    NOT NULL" +
-                    " USAGERATE      REAL     NOT NULL" +
                     " USAGE SCHEDULE  TEXT     NOT NULL" +
+                    " USAGERATE      REAL     NOT NULL" +
                     " PROBLEMCOUNTER  INT      NOT NULL" +
                     " UNITMAINTAINANCECOST   REAL  NOT NULL" +
                     " CURRENTUSE      TEXT     NOT NULL" +
