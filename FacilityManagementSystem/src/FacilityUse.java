@@ -34,6 +34,10 @@ public class FacilityUse {
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
+            ps.close();
+            stmt.close();
+            c.close();
+
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -45,7 +49,10 @@ public class FacilityUse {
         facility.currentUse = null;
         try {
             Connection c = openConnection();
-            String sql = "UPDATE Facilities SET CURRENTUSE "
+            String sql = "UPDATE Facilities SET CURRENTUSE to NULL where ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, facility.ID);
+            ps.executeUpdate();
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -53,8 +60,29 @@ public class FacilityUse {
 
     }
 
-    public Date[] ListInspections(Facility facility){
-        //Not sure what this should be doing
+    public String ListInspections(Facility facility){
+        String result = null;
+        try {
+            Connection c = openConnection();
+            String sql = "SELECT INSPECTIONSCHEDULE FROM Facilities WHERE ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, facility.ID);
+            ps.executeQuery();
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result = rs.getString("INSPECTIONSCHEDULE");
+                System.out.println(result);
+                System.out.println();
+            }
+            rs.close();
+            ps.close();
+            c.close();
+        } catch (Exception e){
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return result;
     }
 
     public Float listActualUsage (Facility facility){

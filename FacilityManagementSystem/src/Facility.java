@@ -20,9 +20,10 @@ public class Facility {
     public float usageRate;
     public int problemCounter;
     public String currentUse;
+    public String inspectionSchedule;
     public Statement stmt = null;
 
-    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse){
+    public Facility(int ID, String facilityName, String facilityManager, String maintenenceSchedule, String usageSchedule, float usageRate, int problemCounter, String currentUse, String inspectionSchedule){
         this.ID = ID;
         this.facilityName = facilityName;
         this.facilityManager = facilityManager;
@@ -31,12 +32,13 @@ public class Facility {
         this.usageRate = usageRate;
         this.problemCounter = problemCounter;
         this.currentUse = currentUse;
+        this.inspectionSchedule = inspectionSchedule;
 
         try {
             Connection c = openConnection();
             stmt = c.createStatement();
-            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Facilities (ID, NAME, MANAGER, MAINTENANCESCHEDULE, USAGESCHEDULE, USAGERATE, PROBLEMCOUNTER, CURRENTUSE, INSPECTIONSCHEDULE) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setInt(1, this.ID);
             ps.setString(2, this.facilityName);
@@ -46,7 +48,12 @@ public class Facility {
             ps.setFloat(6, this.usageRate);
             ps.setInt(7, this.problemCounter);
             ps.setString(8, this.currentUse);
+            ps.setString(9, this.inspectionSchedule);
             ps.executeUpdate();
+
+            ps.close();
+            stmt.close();
+            c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -65,6 +72,10 @@ public class Facility {
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
+            ps.close();
+            stmt.close();
+            c.close();
+
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -82,6 +93,10 @@ public class Facility {
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
+            ps.close();
+            stmt.close();
+            c.close();
+
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -98,6 +113,10 @@ public class Facility {
             ps.setString(1, facility.maintenenceSchedule);
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
+
+            ps.close();
+            stmt.close();
+            c.close();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -117,6 +136,10 @@ public class Facility {
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
 
+            ps.close();
+            stmt.close();
+            c.close();
+
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -133,6 +156,10 @@ public class Facility {
             ps.setFloat(1, facility.usageRate);
             ps.setInt(2, facility.ID);
             ps.executeUpdate();
+
+            ps.close();
+            stmt.close();
+            c.close();
 
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -170,6 +197,7 @@ public class Facility {
             }
             rs.close();
             stmt.close();
+            ps.close();
             c.close();
         } catch (Exception e){
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
