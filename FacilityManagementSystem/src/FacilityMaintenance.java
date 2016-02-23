@@ -34,6 +34,10 @@ public class FacilityMaintenance {
             ps.executeUpdate();
             System.out.println("Maintenance for "+ facility + " has been scheduled.");
 
+            ps.close();
+            stmt.close();
+            c.close();
+
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -102,12 +106,31 @@ public class FacilityMaintenance {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return facility.maintenanceSchedule;
+        return facility.maintenanceRequest;
     }
 
     public String listMaintenance(Facility facility){
-        String maintenance = null;
-        return maintenance;
+        try {
+            Connection c = openConnection();
+            String sql = "SELECT MAINTENANCESCHEDULE FROM Facilities where ID = ?";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, facility.ID);
+            ps.executeQuery();
+
+            String result = null;
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result = rs.getString("MAINTENANCESCHEDULE");
+                System.out.println(result);
+                System.out.println();
+            }
+            ps.close();
+            c.close();
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public String listFacilityProblems(Facility facility){
