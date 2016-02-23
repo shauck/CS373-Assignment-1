@@ -12,10 +12,13 @@ import java.sql.*;
 
 public class FacilityMaintenance {
     public Statement stmt = null;
+    public float requestCounter = 0;
 
     public void makeFacilityMaintenanceRequest(Facility facility, String maintenanceRequest){
+
         scheduleMaintenance(facility, maintenanceRequest);
         System.out.println("A Maintenance Request for " + facility + " has been sumbitted.");
+        requestCounter += 1;
     }
 
     public void scheduleMaintenance(Facility facility, String maintenanceRequest){
